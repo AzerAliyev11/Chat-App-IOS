@@ -20,6 +20,7 @@
 		0B62819E235F0F4D00E35CAF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B62819D235F0F4D00E35CAF /* README.md */; };
 		D92F93A52BF26C59000F7B59 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D92F93A42BF26C59000F7B59 /* GoogleService-Info.plist */; };
 		D9DDF9BA2BF3D43200350F67 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DDF9B92BF3D43200350F67 /* Constants.swift */; };
+		D9DDF9BD2BF3E40100350F67 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DDF9BC2BF3E40100350F67 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		7BB11489086B57E04AF7950A /* Pods-Flash Chat iOS13.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flash Chat iOS13.release.xcconfig"; path = "Target Support Files/Pods-Flash Chat iOS13/Pods-Flash Chat iOS13.release.xcconfig"; sourceTree = "<group>"; };
 		D92F93A42BF26C59000F7B59 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D9DDF9B92BF3D43200350F67 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D9DDF9BC2BF3E40100350F67 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			children = (
 				0B628176235DEE8100E35CAF /* AppDelegate.swift */,
 				0B628178235DEE8100E35CAF /* SceneDelegate.swift */,
+				D9DDF9BB2BF3E3E000350F67 /* Models */,
 				0B628193235DF03400E35CAF /* Views */,
 				0B628192235DF02000E35CAF /* Controllers */,
 				0B62817F235DEE8400E35CAF /* Assets.xcassets */,
@@ -123,6 +126,14 @@
 				4FF477708940683320466CB6 /* Pods_Flash_Chat_iOS13.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D9DDF9BB2BF3E3E000350F67 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D9DDF9BC2BF3E40100350F67 /* Message.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +258,7 @@
 				0B628179235DEE8100E35CAF /* SceneDelegate.swift in Sources */,
 				0B62818F235DF01000E35CAF /* LoginViewController.swift in Sources */,
 				D9DDF9BA2BF3D43200350F67 /* Constants.swift in Sources */,
+				D9DDF9BD2BF3E40100350F67 /* Message.swift in Sources */,
 				0B628191235DF01B00E35CAF /* ChatViewController.swift in Sources */,
 				0B62818D235DF00B00E35CAF /* RegisterViewController.swift in Sources */,
 			);

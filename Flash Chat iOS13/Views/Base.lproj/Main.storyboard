@@ -47,8 +47,8 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="djC-Oe-hmU"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚡️FlashChat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RvF-YD-1yI" customClass="CLTypingLabel" customModule="CLTypingLabel">
-                                <rect key="frame" x="61" y="396" width="271" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FlashChat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gci-ic-hez">
+                                <rect key="frame" x="88" y="396" width="217" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" name="BrandBlue"/>
                                 <nil key="highlightedColor"/>
@@ -57,19 +57,19 @@
                         <viewLayoutGuide key="safeArea" id="w0w-hE-MVy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="gci-ic-hez" firstAttribute="centerX" secondItem="H86-OM-sMN" secondAttribute="centerX" id="0Yq-ax-ZuW"/>
                             <constraint firstItem="dWe-nW-2HB" firstAttribute="trailing" secondItem="w0w-hE-MVy" secondAttribute="trailing" id="7Vx-Xq-VaO"/>
+                            <constraint firstItem="gci-ic-hez" firstAttribute="centerY" secondItem="H86-OM-sMN" secondAttribute="centerY" id="9hF-JK-QHa"/>
                             <constraint firstItem="dWe-nW-2HB" firstAttribute="leading" secondItem="w0w-hE-MVy" secondAttribute="leading" id="Ag7-Hh-D9X"/>
-                            <constraint firstItem="RvF-YD-1yI" firstAttribute="centerY" secondItem="H86-OM-sMN" secondAttribute="centerY" id="Mzt-ci-9tu"/>
                             <constraint firstItem="dWe-nW-2HB" firstAttribute="bottom" secondItem="w0w-hE-MVy" secondAttribute="bottom" id="ZsM-5p-lNb"/>
                             <constraint firstItem="dWe-nW-2HB" firstAttribute="top" secondItem="h2x-tz-C9Y" secondAttribute="bottom" constant="8" id="cnI-Zh-aEc"/>
-                            <constraint firstItem="RvF-YD-1yI" firstAttribute="centerX" secondItem="H86-OM-sMN" secondAttribute="centerX" id="pTZ-Mq-idN"/>
                             <constraint firstItem="h2x-tz-C9Y" firstAttribute="trailing" secondItem="w0w-hE-MVy" secondAttribute="trailing" id="sNZ-Ul-l2q"/>
                             <constraint firstItem="h2x-tz-C9Y" firstAttribute="leading" secondItem="w0w-hE-MVy" secondAttribute="leading" id="tLN-qz-xiG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="d9M-1k-bLk"/>
                     <connections>
-                        <outlet property="titleLabel" destination="RvF-YD-1yI" id="od6-VU-fPJ"/>
+                        <outlet property="titleLabel" destination="gci-ic-hez" id="cCr-tA-U9h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X0w-oB-wTX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
