@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="222" height="61"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label sjsjs sjsjs sjsjs sjsjs sjsj" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMO-fK-mEo" userLabel="MessageLabel">
-                                        <rect key="frame" x="10" y="10" width="202" height="40.666666666666664"/>
+                                        <rect key="frame" x="10" y="10" width="202" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="BrandLightPurple"/>
                                         <nil key="highlightedColor"/>
@@ -33,6 +33,7 @@
                                 </subviews>
                                 <color key="backgroundColor" name="BrandPurple"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="OMO-fK-mEo" secondAttribute="bottom" constant="10" id="6Cw-dV-UBH"/>
                                     <constraint firstItem="OMO-fK-mEo" firstAttribute="top" secondItem="jJn-Jc-3Kq" secondAttribute="top" constant="10" id="H1Y-pv-GHE"/>
                                     <constraint firstItem="OMO-fK-mEo" firstAttribute="leading" secondItem="jJn-Jc-3Kq" secondAttribute="leading" constant="10" id="ONx-5Q-FgE"/>
                                     <constraint firstAttribute="trailing" secondItem="OMO-fK-mEo" secondAttribute="trailing" constant="10" id="Sl8-d3-LZb"/>

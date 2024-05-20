@@ -8,17 +8,16 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class ChatViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
     
-    var messages: [Message] = [
-        Message(sender: "azar", body: "Hi"),
-        Message(sender: "farid", body: "Hey how you doing"),
-        Message(sender: "azar", body: "Fine I guess")
-    ]
+    let db = Firestore.firestore()
+    
+    var messages: [Message] = []
     
     @IBAction func logOutButtonPressed(_ sender: UIBarButtonItem) {
         let firebaseAuth = Auth.auth()
@@ -37,9 +36,46 @@ class ChatViewController: UIViewController {
         title = "⚡️FlashChat"
         
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
+        
+        loadMessages()
+    }
+    
+    func loadMessages()
+    {
+        db.collection(K.FStore.collectionName).addSnapshotListener { querySnapshot, error in
+            if let _ = error {
+                print("Error while loading messages!")
+            } else {
+                self.messages = []
+                if let documents = querySnapshot?.documents {
+                    for doc in documents {
+                        if let sender = doc.data()[K.FStore.senderField] as? String, let body = doc.data()[K.FStore.bodyField] as? String {
+                            let message = Message(sender: sender, body: body)
+                            self.messages.append(message)
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
+        if let messageBody = messageTextfield.text, let userEmail = Auth.auth().currentUser?.email {
+            db.collection(K.FStore.collectionName).addDocument(data: [
+                K.FStore.senderField: userEmail,
+                K.FStore.bodyField: messageBody
+            ]) { error in
+                if let e = error {
+                    print("Error while sending data to database")
+                } else {
+                    print("Data successfully sent!")
+                }
+            }
+        }
     }
     
 
