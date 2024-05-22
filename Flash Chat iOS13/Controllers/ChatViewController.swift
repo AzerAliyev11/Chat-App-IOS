@@ -31,6 +31,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.delegate = self
 
         navigationItem.hidesBackButton = true
         title = "⚡️FlashChat"
@@ -57,6 +58,7 @@ class ChatViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.tableView.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: false)
                     }
                 }
             }
@@ -65,12 +67,13 @@ class ChatViewController: UIViewController {
     
     @IBAction func sendPressed(_ sender: UIButton) {
         if let messageBody = messageTextfield.text, let userEmail = Auth.auth().currentUser?.email {
+            messageTextfield.text = ""
             db.collection(K.FStore.collectionName).addDocument(data: [
                 K.FStore.senderField: userEmail,
                 K.FStore.bodyField: messageBody,
                 K.FStore.dateField: Date().timeIntervalSince1970
             ]) { error in
-                if let e = error {
+                if let _ = error {
                     print("Error while sending data to database")
                 } else {
                     print("Data successfully sent!")
@@ -93,5 +96,9 @@ extension ChatViewController: UITableViewDataSource {
         return cell
     }
     
+    
+}
+
+extension ChatViewController: UITableViewDelegate {
     
 }
