@@ -37,6 +37,7 @@ class ChatViewController: UIViewController {
         title = "⚡️FlashChat"
         
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
+        tableView.register(UINib(nibName: K.myCellNibName, bundle: nil), forCellReuseIdentifier: K.myCellIdentifier)
         
         loadMessages()
     }
@@ -91,6 +92,12 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if messages[indexPath.row].sender == Auth.auth().currentUser?.email {
+            let cell = tableView.dequeueReusableCell(withIdentifier: K.myCellIdentifier, for: indexPath) as! MyMessageCell
+            cell.messageLabel.text = messages[indexPath.row].body
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
         cell.messageLabel.text = messages[indexPath.row].body
         return cell

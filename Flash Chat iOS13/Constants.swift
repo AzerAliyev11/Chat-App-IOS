@@ -10,7 +10,9 @@ import Foundation
 
 struct K {
     static let cellIdentifier = "ReusableCell"
+    static let myCellIdentifier = "MyMessageReusableCell"
     static let cellNibName = "MessageCell"
+    static let myCellNibName = "MyMessageCell"
     static let registerSegue = "RegisterToChat"
     static let loginSegue = "LoginToChat"
     
