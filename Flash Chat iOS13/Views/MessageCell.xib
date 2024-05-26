@@ -25,19 +25,37 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLR-wz-pnr">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="71"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MeAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="rV7-RT-lAi" userLabel="IconImageView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rD9-Xz-N3B" userLabel="IconView">
                                         <rect key="frame" x="0.0" y="31" width="40" height="40"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AvatarIcon" translatesAutoresizingMaskIntoConstraints="NO" id="rV7-RT-lAi" userLabel="IconImageView">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v89-lj-aqz">
+                                                <rect key="frame" x="15.333333333333332" y="9.9999999999999982" width="9.3333333333333321" height="20.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="BrandLightBlue"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="8Qa-C8-HEd"/>
-                                            <constraint firstAttribute="width" constant="40" id="Z5K-Fi-NYB"/>
+                                            <constraint firstItem="v89-lj-aqz" firstAttribute="centerX" secondItem="rD9-Xz-N3B" secondAttribute="centerX" id="BjM-Zu-eT1"/>
+                                            <constraint firstItem="v89-lj-aqz" firstAttribute="centerY" secondItem="rD9-Xz-N3B" secondAttribute="centerY" id="FAD-dj-LS6"/>
+                                            <constraint firstItem="rV7-RT-lAi" firstAttribute="leading" secondItem="rD9-Xz-N3B" secondAttribute="leading" id="IwI-mx-7EA"/>
+                                            <constraint firstAttribute="height" constant="40" id="jtR-f4-PhX"/>
+                                            <constraint firstItem="rV7-RT-lAi" firstAttribute="top" secondItem="rD9-Xz-N3B" secondAttribute="top" id="oNs-jg-Xum"/>
+                                            <constraint firstAttribute="trailing" secondItem="rV7-RT-lAi" secondAttribute="trailing" id="qvp-Tj-TzY"/>
+                                            <constraint firstAttribute="width" constant="40" id="sl0-to-52o"/>
+                                            <constraint firstAttribute="bottom" secondItem="rV7-RT-lAi" secondAttribute="bottom" id="uPP-6Y-42p"/>
                                         </constraints>
-                                    </imageView>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="rD9-Xz-N3B" firstAttribute="leading" secondItem="uLR-wz-pnr" secondAttribute="leading" id="9OJ-92-rQ0"/>
                                     <constraint firstAttribute="width" constant="40" id="Um9-0g-bD9"/>
-                                    <constraint firstAttribute="bottom" secondItem="rV7-RT-lAi" secondAttribute="bottom" id="VOv-rD-G1C"/>
-                                    <constraint firstItem="rV7-RT-lAi" firstAttribute="leading" secondItem="uLR-wz-pnr" secondAttribute="leading" id="WnK-4j-70E"/>
+                                    <constraint firstAttribute="bottom" secondItem="rD9-Xz-N3B" secondAttribute="bottom" id="z9g-o7-lxM"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJn-Jc-3Kq" userLabel="BubbleView">
@@ -83,12 +101,16 @@
                 <outlet property="bubbleView" destination="jJn-Jc-3Kq" id="c1B-GJ-UZx"/>
                 <outlet property="iconImageView" destination="rV7-RT-lAi" id="Tfz-hc-pQT"/>
                 <outlet property="messageLabel" destination="OMO-fK-mEo" id="CqI-qH-7Id"/>
+                <outlet property="userNameLabel" destination="v89-lj-aqz" id="Gj3-r3-as7"/>
             </connections>
             <point key="canvasLocation" x="61.068702290076331" y="39.7887323943662"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="MeAvatar" width="36" height="36"/>
+        <image name="AvatarIcon" width="120" height="120"/>
+        <namedColor name="BrandLightBlue">
+            <color red="0.92199999094009399" green="0.98000001907348633" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="BrandLightPurple">
             <color red="0.98000001907348633" green="0.9649999737739563" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

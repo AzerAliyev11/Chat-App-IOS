@@ -100,6 +100,9 @@ extension ChatViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
         cell.messageLabel.text = messages[indexPath.row].body
+        if let firstCharacter = messages[indexPath.row].sender.first {
+            cell.userNameLabel.text = String(firstCharacter.uppercased())
+        }
         return cell
     }
     
