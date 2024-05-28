@@ -14,7 +14,15 @@ class ChatViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
+    @IBOutlet weak var replyView: UIView!
+    @IBOutlet weak var replyViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var replyLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
     
+    @IBAction func closeReplyButton(_ sender: UIButton) {
+        replyViewHeight.constant = 0
+        replyView.isHidden = true
+    }
     let db = Firestore.firestore()
     
     var messages: [Message] = []
@@ -30,6 +38,8 @@ class ChatViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        replyViewHeight.constant = 0
+        replyView.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -109,6 +119,11 @@ extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let replyAction = UIContextualAction(style: .normal, title: "Reply") { _, _, completionHandler in
             tableView.setEditing(false, animated: true)
+            self.replyLabel.text = "Reply to \(self.messages[indexPath.row].sender)"
+            self.messageLabel.text = self.messages[indexPath.row].body
+            self.replyViewHeight.constant = 60
+            self.replyView.isHidden = false
+            self.tableView.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: true)
         }
         replyAction.backgroundColor = UIColor(named: K.BrandColors.blue)
         let swipeConfg = UISwipeActionsConfiguration(actions: [replyAction])
