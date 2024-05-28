@@ -106,6 +106,15 @@ extension ChatViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let replyAction = UIContextualAction(style: .normal, title: "Reply") { _, _, completionHandler in
+            tableView.setEditing(false, animated: true)
+        }
+        replyAction.backgroundColor = UIColor(named: K.BrandColors.blue)
+        let swipeConfg = UISwipeActionsConfiguration(actions: [replyAction])
+        swipeConfg.performsFirstActionWithFullSwipe = false
+        return swipeConfg
+    }
     
 }
 
