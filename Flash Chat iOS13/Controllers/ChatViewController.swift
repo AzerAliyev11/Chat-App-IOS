@@ -18,10 +18,11 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var replyViewHeight: NSLayoutConstraint!
     @IBOutlet weak var replyLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var replyLabelsView: UIView!
+    @IBOutlet weak var replyCloseView: UIView!
     
     @IBAction func closeReplyButton(_ sender: UIButton) {
-        replyViewHeight.constant = 0
-        replyView.isHidden = true
+        hideReplyArea()
     }
     let db = Firestore.firestore()
     
@@ -36,10 +37,15 @@ class ChatViewController: UIViewController {
           print("Error signing out: %@", signOutError)
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        replyLabelsView.roundLeftCorner(radius: 20)
+        replyCloseView.roundRightCorner(radius: 20)
+        
         replyViewHeight.constant = 0
         replyView.isHidden = true
+        
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -50,6 +56,22 @@ class ChatViewController: UIViewController {
         tableView.register(UINib(nibName: K.myCellNibName, bundle: nil), forCellReuseIdentifier: K.myCellIdentifier)
         
         loadMessages()
+    }
+    
+    func hideReplyArea() {
+        replyViewHeight.constant = 0
+        replyView.isHidden = true
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func showReplyArea() {
+        replyViewHeight.constant = 60
+        replyView.isHidden = false
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     func loadMessages()
@@ -121,9 +143,8 @@ extension ChatViewController: UITableViewDataSource {
             tableView.setEditing(false, animated: true)
             self.replyLabel.text = "Reply to \(self.messages[indexPath.row].sender)"
             self.messageLabel.text = self.messages[indexPath.row].body
-            self.replyViewHeight.constant = 60
-            self.replyView.isHidden = false
-            self.tableView.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: true)
+            self.showReplyArea()
+            self.tableView.scrollToRow(at: IndexPath(row: indexPath.row, section: 0), at: .none, animated: true)
         }
         replyAction.backgroundColor = UIColor(named: K.BrandColors.blue)
         let swipeConfg = UISwipeActionsConfiguration(actions: [replyAction])
@@ -135,4 +156,24 @@ extension ChatViewController: UITableViewDataSource {
 
 extension ChatViewController: UITableViewDelegate {
     
+}
+
+extension UIView {
+    func roundLeftCorner(radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds,
+                                byRoundingCorners: [.topLeft],
+                                cornerRadii: CGSize(width: radius, height: radius))
+        
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
+    
+    func roundRightCorner(radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.topRight], cornerRadii: CGSize(width: radius, height: radius))
+        
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
 }

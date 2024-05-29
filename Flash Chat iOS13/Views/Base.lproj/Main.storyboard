@@ -276,7 +276,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="S6L-hg-cne">
                                 <rect key="frame" x="0.0" y="103" width="393" height="595"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="BrandPurple"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KtZ-Q2-nHE" userLabel="Reply View">
                                 <rect key="frame" x="0.0" y="698" width="393" height="60"/>
@@ -285,27 +285,27 @@
                                         <rect key="frame" x="0.0" y="0.0" width="333" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reply to Azar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H76-Gt-U72" userLabel="Reply Label">
-                                                <rect key="frame" x="10" y="9.6666666666666288" width="323" height="30"/>
+                                                <rect key="frame" x="10" y="4.6666666666666288" width="323" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="TcR-Ap-eDZ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" name="BrandPurple"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Good Morning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxP-zd-e7C" userLabel="Message Label">
-                                                <rect key="frame" x="10" y="39.666666666666629" width="323" height="20.333333333333329"/>
+                                                <rect key="frame" x="10" y="34.666666666666629" width="323" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" name="BrandLightBlue"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="BrandBlue"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="H76-Gt-U72" secondAttribute="trailing" id="B0H-XY-98K"/>
                                             <constraint firstItem="H76-Gt-U72" firstAttribute="leading" secondItem="PpO-DT-Pdy" secondAttribute="leading" constant="10" id="F5Y-HI-Dg1"/>
                                             <constraint firstItem="zxP-zd-e7C" firstAttribute="top" secondItem="H76-Gt-U72" secondAttribute="bottom" id="Ud0-Pc-tgG"/>
-                                            <constraint firstAttribute="bottom" secondItem="zxP-zd-e7C" secondAttribute="bottom" id="VlC-jz-dGD"/>
+                                            <constraint firstAttribute="bottom" secondItem="zxP-zd-e7C" secondAttribute="bottom" constant="5" id="VlC-jz-dGD"/>
                                             <constraint firstAttribute="trailing" secondItem="zxP-zd-e7C" secondAttribute="trailing" id="Zkf-2S-4Nc"/>
                                             <constraint firstItem="zxP-zd-e7C" firstAttribute="leading" secondItem="PpO-DT-Pdy" secondAttribute="leading" constant="10" id="pZD-t7-3xB"/>
                                         </constraints>
@@ -316,13 +316,15 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lp-AS-mKo">
                                                 <rect key="frame" x="-3.3333333333333144" y="12.666666666666629" width="67" height="35"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Close"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Close">
+                                                    <color key="baseForegroundColor" name="BrandLightBlue"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="closeReplyButton:" destination="lwd-AH-u8E" eventType="touchUpInside" id="NYm-z7-Nyh"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="BrandBlue"/>
                                         <constraints>
                                             <constraint firstItem="2lp-AS-mKo" firstAttribute="centerY" secondItem="oSq-IM-kmt" secondAttribute="centerY" id="Onr-SA-4Jw"/>
                                             <constraint firstAttribute="width" constant="60" id="YQr-sM-Tvf"/>
@@ -330,7 +332,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="PpO-DT-Pdy" secondAttribute="bottom" id="0ZI-Ub-AcV"/>
                                     <constraint firstItem="oSq-IM-kmt" firstAttribute="top" secondItem="KtZ-Q2-nHE" secondAttribute="top" id="9o7-Ie-sKr"/>
@@ -407,7 +409,9 @@
                     <connections>
                         <outlet property="messageLabel" destination="zxP-zd-e7C" id="EEF-WJ-uba"/>
                         <outlet property="messageTextfield" destination="UWj-GQ-Vph" id="INS-Xk-EA9"/>
+                        <outlet property="replyCloseView" destination="oSq-IM-kmt" id="sgT-fG-tQs"/>
                         <outlet property="replyLabel" destination="H76-Gt-U72" id="f9u-yX-sGc"/>
+                        <outlet property="replyLabelsView" destination="PpO-DT-Pdy" id="LcB-pA-ud7"/>
                         <outlet property="replyView" destination="KtZ-Q2-nHE" id="O6a-cs-D1y"/>
                         <outlet property="replyViewHeight" destination="LG9-y6-WhS" id="t6t-j2-xsG"/>
                         <outlet property="tableView" destination="S6L-hg-cne" id="dTJ-K9-WAe"/>
