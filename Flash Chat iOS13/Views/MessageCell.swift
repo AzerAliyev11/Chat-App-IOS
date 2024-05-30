@@ -15,12 +15,25 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var repliedName: UILabel!
+    @IBOutlet weak var repliedMessage: UILabel!
+    @IBOutlet weak var replyView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+    }
+    
+    func withoutRepylSetup() {
+        repliedName.text = ""
+        repliedMessage.text = ""
         bubbleView.layer.cornerRadius = bubbleView.frame.size.height / 5
+        replyView.isHidden = true
+    }
+    
+    func withReplySetup(repliedUser: String, repliedMessage: String) {
+        self.repliedName.text = repliedUser
+        self.repliedMessage.text = repliedMessage
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -132,6 +132,12 @@ extension ChatViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
         cell.messageLabel.text = messages[indexPath.row].body
+        
+        //if no reply
+        //cell.withoutRepylSetup()
+        //else
+        cell.withReplySetup(repliedUser: "Azarrr", repliedMessage: "Hi my dear friend")
+        
         if let firstCharacter = messages[indexPath.row].sender.first {
             cell.userNameLabel.text = String(firstCharacter.uppercased())
         }
@@ -172,6 +178,20 @@ extension UIView {
     func roundRightCorner(radius: CGFloat) {
         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.topRight], cornerRadii: CGSize(width: radius, height: radius))
         
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
+    
+    func roundBottomLeftCorner(radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.bottomLeft], cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
+    
+    func roundBottomRightCorner(radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.bottomRight], cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         self.layer.mask = mask
