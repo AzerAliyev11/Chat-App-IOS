@@ -24,8 +24,9 @@ class ChatViewController: UIViewController {
     @IBAction func closeReplyButton(_ sender: UIButton) {
         hideReplyArea()
     }
-    let db = Firestore.firestore()
     
+    
+    let db = Firestore.firestore()
     var messages: [Message] = []
     
     @IBAction func logOutButtonPressed(_ sender: UIBarButtonItem) {
@@ -80,17 +81,27 @@ class ChatViewController: UIViewController {
             if let _ = error {
                 print("Error while loading messages!")
             } else {
-                self.messages = []
+                //self.messages = []
                 if let documents = querySnapshot?.documents {
+                    var i = 1
                     for doc in documents {
                         if let sender = doc.data()[K.FStore.senderField] as? String, let body = doc.data()[K.FStore.bodyField] as? String {
-                            let message = Message(sender: sender, body: body)
-                            self.messages.append(message)
+                            let rU = doc.data()[K.FStore.replyUserField] as? String
+                            let rM = doc.data()[K.FStore.replyMessageField] as? String
+                            let message = Message(sender: sender, body: body, repliedUser: rU, repliedMessage: rM)
+                            if(i > self.messages.count) {
+                                self.messages.append(message)
+                                
+                                let newMessageIndex = IndexPath(row: self.messages.count - 1, section: 0)
+                                self.tableView.beginUpdates()
+                                self.tableView.insertRows(at: [newMessageIndex], with: .none)
+                                self.tableView.endUpdates()
+                            }
+                            i += 1
                         }
                     }
                     
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                    if self.messages.count > 0 {
                         self.tableView.scrollToRow(at: IndexPath(row: self.messages.count - 1, section: 0), at: .bottom, animated: false)
                     }
                 }
@@ -104,7 +115,9 @@ class ChatViewController: UIViewController {
             db.collection(K.FStore.collectionName).addDocument(data: [
                 K.FStore.senderField: userEmail,
                 K.FStore.bodyField: messageBody,
-                K.FStore.dateField: Date().timeIntervalSince1970
+                K.FStore.dateField: Date().timeIntervalSince1970,
+                K.FStore.replyMessageField: messageLabel.text ?? NSNull(),
+                K.FStore.replyUserField: replyLabel.text ?? NSNull()
             ]) { error in
                 if let _ = error {
                     print("Error while sending data to database")
@@ -133,10 +146,17 @@ extension ChatViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
         cell.messageLabel.text = messages[indexPath.row].body
         
-        //if no reply
-        //cell.withoutRepylSetup()
-        //else
-        cell.withReplySetup(repliedUser: "Azarrr", repliedMessage: "Hi my dear friend")
+        if let rU =  messages[indexPath.row].repliedUser, let rM = messages[indexPath.row].repliedMessage {
+            if rU.isEmpty {
+                cell.withoutRepylSetup()
+            }
+            else {
+                cell.withReplySetup(repliedUser: rU, repliedMessage: rM)
+            }
+        }
+        else {
+            cell.withoutRepylSetup()
+        }
         
         if let firstCharacter = messages[indexPath.row].sender.first {
             cell.userNameLabel.text = String(firstCharacter.uppercased())

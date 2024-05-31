@@ -32,6 +32,7 @@ class MessageCell: UITableViewCell {
     }
     
     func withReplySetup(repliedUser: String, repliedMessage: String) {
+        replyView.isHidden = false
         self.repliedName.text = repliedUser
         self.repliedMessage.text = repliedMessage
     }
