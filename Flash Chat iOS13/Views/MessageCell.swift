@@ -22,12 +22,13 @@ class MessageCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        bubbleView.layer.cornerRadius = bubbleView.frame.size.height / 5
     }
     
     func withoutRepylSetup() {
         repliedName.text = ""
         repliedMessage.text = ""
-        bubbleView.layer.cornerRadius = bubbleView.frame.size.height / 5
         replyView.isHidden = true
     }
     

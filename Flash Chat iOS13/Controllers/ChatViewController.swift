@@ -23,11 +23,14 @@ class ChatViewController: UIViewController {
     
     @IBAction func closeReplyButton(_ sender: UIButton) {
         hideReplyArea()
+        replyAreaActive = false
     }
     
     
     let db = Firestore.firestore()
     var messages: [Message] = []
+    
+    var replyAreaActive = false
     
     @IBAction func logOutButtonPressed(_ sender: UIBarButtonItem) {
         let firebaseAuth = Auth.auth()
@@ -49,7 +52,7 @@ class ChatViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-
+        
         navigationItem.hidesBackButton = true
         title = "⚡️FlashChat"
         
@@ -57,6 +60,41 @@ class ChatViewController: UIViewController {
         tableView.register(UINib(nibName: K.myCellNibName, bundle: nil), forCellReuseIdentifier: K.myCellIdentifier)
         
         loadMessages()
+        
+        //Listeners for keyboard open and close
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        //Adding tap gesture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false // This allows the gesture to pass through to other views
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo, let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+
+        let keyboardHeight = keyboardFrame.cgRectValue.height
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = -keyboardHeight
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func hideReplyArea() {
@@ -111,6 +149,9 @@ class ChatViewController: UIViewController {
     
     @IBAction func sendPressed(_ sender: UIButton) {
         if let messageBody = messageTextfield.text, let userEmail = Auth.auth().currentUser?.email {
+            if replyAreaActive {
+                hideReplyArea()
+            }
             messageTextfield.text = ""
             db.collection(K.FStore.collectionName).addDocument(data: [
                 K.FStore.senderField: userEmail,
@@ -140,6 +181,15 @@ extension ChatViewController: UITableViewDataSource {
         if messages[indexPath.row].sender == Auth.auth().currentUser?.email {
             let cell = tableView.dequeueReusableCell(withIdentifier: K.myCellIdentifier, for: indexPath) as! MyMessageCell
             cell.messageLabel.text = messages[indexPath.row].body
+            if let rU = messages[indexPath.row].repliedUser, let rM = messages[indexPath.row].repliedMessage {
+                if rU.isEmpty {
+                    cell.withoutReplySetup()
+                } else {
+                    cell.withReplySetup(replyName: rU, replyMessage: rM)
+                }
+            } else {
+                cell.withoutReplySetup()
+            }
             return cell
         }
         
@@ -166,6 +216,7 @@ extension ChatViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let replyAction = UIContextualAction(style: .normal, title: "Reply") { _, _, completionHandler in
+            self.replyAreaActive = true
             tableView.setEditing(false, animated: true)
             self.replyLabel.text = "Reply to \(self.messages[indexPath.row].sender)"
             self.messageLabel.text = self.messages[indexPath.row].body
